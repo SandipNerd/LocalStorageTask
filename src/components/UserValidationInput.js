@@ -33,21 +33,20 @@ const UserValidationInput = props => {
 
 const styles = StyleSheet.create({
   textInput: {
-    backgroundColor: '#e0e6e9',
     width: INPUT_SIZE,
     marginTop: 20,
-    borderRadius: 10,
     height: 50,
     paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 20,
   },
   errorText: {
-    color: 'red',
+    color: '#ff2d55',
     fontSize: 12,
+    marginHorizontal: 10,
   },
   errorInput: {
-    borderColor: 'red',
-    borderWidth: 1,
-    elevation: 3,
+    borderColor: '#ff2d55',
   },
 });
 

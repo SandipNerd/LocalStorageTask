@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Dimensions,
@@ -13,6 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import validationRegex from '../validation/validationRegex';
 import UserValidationInput from '../components/UserValidationInput';
+import CustomButton from '../components/CustomButton';
+import NormalButton from '../components/NormalButton';
 
 const {width} = Dimensions.get('window');
 const INPUT_SPACE = (width - width * 0.8) / 2;
@@ -41,8 +43,13 @@ const SignUpScreen = props => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <Text style={styles.signUpText}>Sign up</Text>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{backgroundColor: 'white', paddingTop: 30}}>
+      <Text style={styles.signUpText}>
+        <Text style={{color: 'black'}}>Create </Text>
+        <Text style={{color: '#ff2d55'}}>Account</Text>
+      </Text>
       <View style={styles.formContainer}>
         <Formik
           initialValues={{
@@ -93,7 +100,7 @@ const SignUpScreen = props => {
                 <RadioButton.Group
                   onValueChange={handleChange('gender')}
                   value={values.gender}>
-                  <View style={[styles.row, {marginVertical: 30}]}>
+                  <View style={[styles.row, {marginTop: 10}]}>
                     <View style={styles.row}>
                       <Text>Male</Text>
                       <RadioButton value="M"></RadioButton>
@@ -105,19 +112,31 @@ const SignUpScreen = props => {
                   </View>
                 </RadioButton.Group>
               </View>
-              <View style={styles.row}>
-                <Button
+
+              <CustomButton
+                title="REGISTER"
+                click={handleSubmit}
+                disabled={!isValid}
+              />
+              <View style={[styles.row, {marginVertical: 10}]}>
+                {/* <Button
                   onPress={handleSubmit}
                   title="SIGN UP"
                   disabled={!isValid}
+                /> */}
+                <NormalButton
+                  title="Sign in"
+                  click={() => {
+                    props.navigation.navigate('signIn');
+                  }}
                 />
-                <Button
+                <NormalButton
                   title="gotousers"
-                  onPress={() => {
+                  click={() => {
                     props.navigation.navigate('userList');
                   }}
                 />
-                <Button title="clear" onPress={clearData} />
+                {/* <Button title="clear" onPress={clearData} /> */}
               </View>
             </>
           )}
@@ -128,17 +147,16 @@ const SignUpScreen = props => {
 };
 
 const styles = StyleSheet.create({
-  formContainer: {paddingHorizontal: INPUT_SPACE},
+  formContainer: {paddingHorizontal: INPUT_SPACE, marginVertical: 10},
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
   signUpText: {
-    textAlign: 'center',
-    marginTop: 30,
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
