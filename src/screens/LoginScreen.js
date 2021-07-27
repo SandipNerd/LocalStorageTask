@@ -23,6 +23,8 @@ const LoginScreenScreen = props => {
       await AsyncStorage.setItem('curUser', JSON.stringify(email));
       alert('Login successfull');
       props.navigation.navigate('home', {fullname: email});
+    } else {
+      alert('login unsuccessfull');
     }
   };
 
